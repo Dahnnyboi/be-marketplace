@@ -1,0 +1,1 @@
+declare type ENVIRONMENT_TYPE = string | 'development' | 'production' | undefined;

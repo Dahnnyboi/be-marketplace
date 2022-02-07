@@ -1,11 +1,14 @@
 import express from 'express';
+import loaders from './src/loaders';
+import {SERVER_PORT} from './src/constants/environments';
 
-const app = express();
+async function startServer(): Promise<void> {
+    const app = express();
 
-app.get('/', (req, res) => {
-    res.send('Well done!');
-})
+    await loaders(app);
+    app.listen(SERVER_PORT, () => {
+        console.log('Server running...')
+    })
+}
 
-app.listen(3000, () => {
-    console.log('The application is listening on port 3000!');
-})
+startServer();
