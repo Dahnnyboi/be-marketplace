@@ -17,5 +17,8 @@
       "constants/*": ["constants/*"]
     },                                      
   },
+  "ts-node": {
+    "files": true
+  },
   "include": ["src/**/*", "index.ts"]
 }
