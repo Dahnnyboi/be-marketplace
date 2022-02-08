@@ -5,14 +5,17 @@
     "rootDir": "./",                                  
     "baseUrl": "./src",                                  
     "outDir": "build",                                   
-    // "paths": {},                                      
     "typeRoots": ["src/typings", "./node_modules/@types"],                                  
-    // "types": [],                                      
     "esModuleInterop": true,                             
     "forceConsistentCasingInFileNames": true,            
     "strict": true,                                      
     "noImplicitAny": true,                            
-    "skipLibCheck": true                                 
+    "skipLibCheck": true,                                 
+    "paths": {
+      "loaders": ["loaders/index"],
+      "loaders/*": ["loaders/*"],
+      "constants/*": ["constants/*"]
+    },                                      
   },
   "include": ["src/**/*", "index.ts"]
 }

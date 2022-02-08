@@ -1,14 +1,14 @@
 import express from 'express';
-import loaders from './src/loaders';
-import {SERVER_PORT} from './src/constants/environments';
+import loaders from 'loaders';
+import { SERVER_PORT } from 'constants/environments';
 
 async function startServer(): Promise<void> {
-    const app = express();
+  const app = express();
 
-    await loaders(app);
-    app.listen(SERVER_PORT, () => {
-        console.log('Server running...')
-    })
+  await loaders(app);
+  app.listen(SERVER_PORT, () => {
+    console.log('Server running...');
+  });
 }
 
-startServer();
+startServer().catch(() => process.exit(1));
