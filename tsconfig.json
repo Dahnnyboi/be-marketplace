@@ -14,8 +14,12 @@
     "paths": {
       "loaders": ["loaders/index"],
       "loaders/*": ["loaders/*"],
-      "constants/*": ["constants/*"]
-    },                                      
+      "constants/*": ["constants/*"],
+      "models/*": ["models/*"],
+      "routes": ["routes/index"],
+    },
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,                                      
   },
   "ts-node": {
     "files": true

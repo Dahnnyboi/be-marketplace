@@ -7,8 +7,9 @@ import cors from 'cors';
 import {
   FE_LOCAL_DEVELOPMENT_URL,
   FE_STAGING_DEPLOYMENT_URL,
-} from '../constants/environments';
-import { API_PREFIX } from '../constants/common';
+} from 'constants/environments';
+import { API_PREFIX } from 'constants/common';
+import routes from 'routes';
 
 const whiteList = [
   FE_LOCAL_DEVELOPMENT_URL,
@@ -41,9 +42,15 @@ export default (app: Application): void => {
   app.use(limiter);
   app.use(cookieParser());
 
+  app.use(API_PREFIX, routes());
+
   app.use(API_PREFIX, (req: Request, res: Response) => {
     res
       .status(200)
       .json({ message: 'Welcome to BE Marketplace API' });
+  });
+
+  app.get('*', (req: Request, res: Response) => {
+    res.status(400).json({ message: '404 Not Found' });
   });
 };

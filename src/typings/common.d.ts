@@ -4,6 +4,8 @@ declare type ENVIRONMENT_TYPE =
   | 'production'
   | undefined;
 
+declare type userType = 'buyer' | 'seller';
+
 type StaticOrigin =
   | boolean
   | string
