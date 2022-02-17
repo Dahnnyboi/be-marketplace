@@ -1,10 +1,10 @@
-declare type ENVIRONMENT_TYPE =
+declare type EnvironmentType =
   | string
   | 'development'
   | 'production'
   | undefined;
 
-declare type userType = 'buyer' | 'seller';
+declare type UserType = 'buyer' | 'seller';
 
 type StaticOrigin =
   | boolean

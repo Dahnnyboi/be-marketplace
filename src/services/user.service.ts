@@ -16,7 +16,7 @@ class UsersService {
     lastName: string,
     email: string,
     password: string,
-    type: userType,
+    type: UserType,
   ): Promise<void> {
     const salt = await bcrypt.genSalt(SALT_ROUNDS);
     const hashPassword = await bcrypt.hash(password, salt);

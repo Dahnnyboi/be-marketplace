@@ -14,7 +14,7 @@ class UsersModel extends Model {
 
   password!: string;
 
-  type!: userType;
+  type!: UserType;
 }
 
 UsersModel.init(
