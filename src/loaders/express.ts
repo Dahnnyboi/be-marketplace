@@ -10,6 +10,12 @@ import {
 } from 'constants/environments';
 import { API_PREFIX } from 'constants/common';
 import routes from 'routes';
+import {
+  customErrorHandler,
+  unauthorizedErrorHandler,
+  cannotFoundErrorHandler,
+} from 'middlewares/errors/express.middleware';
+import { SequelizeErrorMiddleware } from 'middlewares/errors/sequelize.middleware';
 
 const whiteList = [
   FE_LOCAL_DEVELOPMENT_URL,
@@ -44,13 +50,14 @@ export default (app: Application): void => {
 
   app.use(API_PREFIX, routes());
 
-  app.use(API_PREFIX, (req: Request, res: Response) => {
+  app.get(API_PREFIX, (req: Request, res: Response) => {
     res
       .status(200)
       .json({ message: 'Welcome to BE Marketplace API' });
   });
 
-  app.get('*', (req: Request, res: Response) => {
-    res.status(400).json({ message: '404 Not Found' });
-  });
+  app.use(unauthorizedErrorHandler);
+  app.use(SequelizeErrorMiddleware);
+  app.use(customErrorHandler);
+  app.use(cannotFoundErrorHandler);
 };

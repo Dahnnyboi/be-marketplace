@@ -2,6 +2,7 @@ import { Service } from 'typedi';
 import { DataTypes, Model, UUIDV4 } from 'sequelize';
 import sequelizeInstance from 'loaders/sequelize';
 import { USER_TYPES } from 'constants/types';
+import { FEEDBACK } from 'constants/validations';
 
 @Service()
 class UsersModel extends Model {
@@ -27,17 +28,35 @@ UsersModel.init(
     firstName: {
       type: DataTypes.STRING,
       allowNull: false,
+      validate: {
+        notNull: {
+          msg: FEEDBACK.required('first name'),
+        },
+      },
     },
     lastName: {
       type: DataTypes.STRING,
       allowNull: false,
+      validate: {
+        notNull: {
+          msg: FEEDBACK.required('last name'),
+        },
+      },
     },
     email: {
       type: DataTypes.STRING,
       allowNull: false,
-      unique: true,
+      unique: {
+        name: 'email',
+        msg: FEEDBACK.takenEmail,
+      },
       validate: {
-        isEmail: true,
+        notNull: {
+          msg: FEEDBACK.required('email'),
+        },
+        isEmail: {
+          msg: FEEDBACK.validEmail,
+        },
       },
     },
     salt: {
@@ -52,7 +71,13 @@ UsersModel.init(
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
-        isIn: [USER_TYPES],
+        notNull: {
+          msg: FEEDBACK.required('type'),
+        },
+        isIn: {
+          msg: FEEDBACK.onlyValidType('type', USER_TYPES),
+          args: [USER_TYPES],
+        },
       },
     },
   },
