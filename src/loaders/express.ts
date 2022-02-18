@@ -47,9 +47,15 @@ export default (app: Application): void => {
   app.use(cors(corsOptions));
   app.use(limiter);
   app.use(cookieParser());
+  app.use(express.static('./src/public'));
+  app.set('view engine', 'pug');
+  app.set('views', './src/views');
+
+  app.get('/', (req: Request, res: Response) => {
+    res.render('index');
+  });
 
   app.use(API_PREFIX, routes());
-
   app.get(API_PREFIX, (req: Request, res: Response) => {
     res
       .status(200)

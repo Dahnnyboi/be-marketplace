@@ -1,0 +1,13 @@
+.index-logo {
+  display: block;
+  margin: 16px auto;
+  width: 320px;
+}
+
+.index-base-route {
+  font-weight: 600;
+}
+
+.index-section {
+  margin-bottom: 48px;
+}

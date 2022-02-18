@@ -1,0 +1,40 @@
+#collapsible {
+  cursor: pointer;
+  padding: 12px;
+  background-color: var(--white);
+  margin-top: 8px;
+}
+
+.collapsible-content {
+  display: none;
+  overflow: hidden;
+  padding: 12px;
+  background-color: var(--primary);
+  color: var(--white);
+}
+
+.collapsible-type {
+  font-weight: 600;
+  padding: 3px 5px;
+  border-radius: 2px;
+  background-color: var(--primary);
+  color: var(--white);
+  margin-right: 4px;
+}
+
+.collapsible-route {
+  font-weight: 600;
+}
+
+.collapsible-desc {
+  margin-top: 8px;
+}
+
+.collapsible-type-response {
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.collapsible-value {
+  font-style: italic;
+}

@@ -1,0 +1,51 @@
+include ./mixins/collapsible.pug
+-
+  let user_signup_post = {
+    firstName: 'string',
+    lastName: 'string',
+    email: 'string - only accepts valid email',
+    password: 'string - only accepts 8 characters, 1 uppercase, 1 lowercase and 1 number',
+    type: 'string - only accepts `buyer` and `seller`'
+  }
+
+html
+  head
+    title Marketplace backend
+    block styles
+      link(
+        rel='stylesheet',
+        type='text/css',
+        href='/stylesheets/pages/index.css'
+      )
+      link(
+        rel='stylesheet',
+        type='text/css',
+        href='/stylesheets/common.css'
+      )
+  body.bg-tertiary
+    .index-section
+      img.index-logo(
+        src='images/marketplace-logo.svg',
+        alt='marketplace-logo'
+      )
+      h1.header.text-center Marketplace api
+
+      h4.sub-header.text-center A simple marketplace API wherein users can buy and sell their products
+
+      hr
+
+      .text-center
+        span Base Route:
+        a.index-base-route(
+          href='https://marketplace-21.herokuapp.com/api/v1'
+        ) https://marketplace-21.herokuapp.com/api/v1
+        .text-center
+        span Github repo:
+        a.index-base-route(
+          href='https://github.com/Dahnnyboi/be-marketplace'
+        ) https://github.com/Dahnnyboi/be-marketplace
+
+    .index-section
+      h1.header.text-center Api routes
+      h4.sub-header Users
+      +collapsible('POST', '/users/signup', 'Create a user ', user_signup_post)

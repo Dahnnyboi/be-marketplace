@@ -1,0 +1,23 @@
+mixin collapsible(type, route, desc, requests)
+  block style
+    link(
+      rel='stylesheet',
+      type='text/css',
+      href='/stylesheets/mixins/collapsible.css'
+    )
+  block scripts
+    script(src='/scripts/mixins/collapsible.js')
+  #collapsible
+    span.collapsible-type= type
+    span.collapsible-route= route
+    p.collapsible-desc= desc
+
+  .collapsible-content
+    case type
+      when 'POST': p.collapsible-type-response Request Body
+      when 'PUT': p.collapsible-type-response Request Body
+      default: p.collapsible-type-response Response Body
+    each val, key in requests
+      p
+        span= key + ' : '
+        span.collapsible-value= val

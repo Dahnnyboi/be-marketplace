@@ -1,0 +1,101 @@
+@import url('https://fonts.googleapis.com/css2?family=Comforter&family=Open+Sans&display=swap');
+:root {
+  --primary: #03045e;
+  --secondary: #00b4d8;
+  --tertiary: #caf0f8;
+  --white: #fff;
+  --black: #000;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Open Sans', sans-serif;
+  color: var(--primary);
+  margin: 1em;
+}
+
+hr {
+  border-top: 3px solid var(--primary);
+  width: 48px;
+  display: block;
+  margin: 16px auto;
+}
+
+span,
+p,
+a,
+li {
+  font-size: 14px;
+}
+
+a {
+  color: var(--primary);
+  font-style: italic;
+}
+
+.header {
+  font-family: 'Comforter', cursive;
+  font-size: 4em;
+  margin-bottom: 0.25em;
+  letter-spacing: 2px;
+}
+
+.sub-header {
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 600;
+  margin-bottom: 0.25em;
+  letter-spacing: 1px;
+}
+
+.font-cursive {
+  font-family: 'Comforter Brush', cursive;
+}
+
+.text-primary {
+  color: var(--primary);
+}
+
+.text-secondary {
+  color: var(--secondary);
+}
+
+.text-tertiary {
+  color: var(--tertiary);
+}
+
+.text-white {
+  color: var(--white);
+}
+
+.text-black {
+  color: var(--black);
+}
+
+.text-center {
+  text-align: center;
+}
+
+.bg-primary {
+  background-color: var(--primary);
+}
+
+.bg-secondary {
+  background-color: var(--secondary);
+}
+
+.bg-tertiary {
+  background-color: var(--tertiary);
+}
+
+.bg-white {
+  background-color: var(--white);
+}
+
+.bg-black {
+  background-color: var(--black);
+}
