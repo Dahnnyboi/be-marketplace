@@ -30,6 +30,34 @@ class UsersService {
       password: hashPassword,
     });
   }
+
+  async findUserById(id: string): Promise<false | UserModel> {
+    const user = await this.UserModelService.findOne({
+      where: { userId: id },
+    });
+
+    if (!user) return false;
+
+    return user;
+  }
+
+  async findUserByEmailAndPassword(
+    email: string,
+    password: string,
+  ): Promise<false | UserModel> {
+    const user = await this.UserModelService.findOne({
+      where: { email },
+    });
+
+    if (!user) return false;
+
+    const { password: userPassword } = user;
+    const match = await bcrypt.compare(password, userPassword);
+
+    if (!match) return false;
+
+    return user;
+  }
 }
 
 export default Container.get(UsersService);

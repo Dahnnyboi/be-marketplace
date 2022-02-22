@@ -4,6 +4,7 @@ import helmet from 'helmet';
 import rateLimit from 'express-rate-limit';
 import cookieParser from 'cookie-parser';
 import cors from 'cors';
+import passport from 'passport';
 import {
   FE_LOCAL_DEVELOPMENT_URL,
   FE_STAGING_DEPLOYMENT_URL,
@@ -16,6 +17,7 @@ import {
   cannotFoundErrorHandler,
 } from 'middlewares/errors/express.middleware';
 import { SequelizeErrorMiddleware } from 'middlewares/errors/sequelize.middleware';
+import passportLoader from './passport';
 
 const whiteList = [
   FE_LOCAL_DEVELOPMENT_URL,
@@ -50,6 +52,8 @@ export default (app: Application): void => {
   app.use(express.static('./src/public'));
   app.set('view engine', 'pug');
   app.set('views', './src/views');
+  app.use(passport.initialize());
+  passportLoader();
 
   app.get('/', (req: Request, res: Response) => {
     res.render('index');

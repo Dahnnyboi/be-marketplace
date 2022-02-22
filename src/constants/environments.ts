@@ -24,3 +24,5 @@ export const { CLOUD_DB_HOST } = process.env;
 export const CLOUD_DB_PORT: number = +(
   process.env.CLOUD_DB_PORT || '5432'
 );
+
+export const { JWT_SECRET = 'marketplace_jwt' } = process.env;
