@@ -1,7 +1,7 @@
 import { Router, Request, Response, NextFunction } from 'express';
 import { body } from 'express-validator';
 import UserModel from 'models/users.model';
-import UserService from 'services/user.service';
+import userService from 'services/user.service';
 import { REGEX, FEEDBACK } from 'constants/validations';
 import { expressValidatorErrorHandler } from 'middlewares/errors/express-validator.middleware';
 
@@ -28,7 +28,7 @@ export default (app: Router) => {
         req.body as UserModel;
 
       const handler = async () => {
-        await UserService.createUser(
+        await userService.createUser(
           firstName,
           lastName,
           email,
