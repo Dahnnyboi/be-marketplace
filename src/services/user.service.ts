@@ -31,6 +31,53 @@ class UsersService {
     });
   }
 
+  async updateUserDetails(
+    id: string,
+    firstName?: string,
+    lastName?: string,
+    email?: string,
+    image?: string,
+  ): Promise<void> {
+    await this.UserModelService.update(
+      {
+        firstName,
+        lastName,
+        email,
+        image,
+      },
+      { where: { userId: id } },
+    );
+  }
+
+  async checkUserPassword(
+    id: string,
+    password: string,
+  ): Promise<boolean> {
+    const user = await this.UserModelService.findOne({
+      where: { userId: id },
+    });
+
+    if (!user) return false;
+
+    const { password: userPassword } = user;
+    const match = await bcrypt.compare(password, userPassword);
+
+    return match;
+  }
+
+  async updateUserPassword(id: string, password: string) {
+    const salt = await bcrypt.genSalt(SALT_ROUNDS);
+    const hashPassword = await bcrypt.hash(password, salt);
+
+    await this.UserModelService.update(
+      {
+        salt,
+        password: hashPassword,
+      },
+      { where: { userId: id } },
+    );
+  }
+
   async findUserById(id: string): Promise<false | UserModel> {
     const user = await this.UserModelService.findOne({
       where: { userId: id },

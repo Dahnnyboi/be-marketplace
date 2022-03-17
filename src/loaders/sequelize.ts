@@ -40,6 +40,12 @@ const sequelize = new Sequelize(
       idle: 10000,
     },
     query: { raw: true },
+    dialectOptions: {
+      ssl: !isDevelopment && {
+        require: true,
+        rejectUnauthorized: false,
+      },
+    },
   },
 );
 

@@ -25,4 +25,8 @@ export const CLOUD_DB_PORT: number = +(
   process.env.CLOUD_DB_PORT || '5432'
 );
 
+export const { CLOUDINARY_NAME } = process.env;
+export const { CLOUDINARY_API_KEY } = process.env;
+export const { CLOUDINARY_API_SECRET } = process.env;
+
 export const { JWT_SECRET = 'marketplace_jwt' } = process.env;

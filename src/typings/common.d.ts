@@ -6,6 +6,12 @@ declare type EnvironmentType =
 
 declare type UserType = 'buyer' | 'seller';
 
+type PasswordBody = {
+  currentPassword: string;
+  newPassword: string;
+  confirmPassword: string;
+};
+
 type StaticOrigin =
   | boolean
   | string

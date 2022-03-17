@@ -15,6 +15,8 @@ class UsersModel extends Model {
   password!: string;
 
   type!: UserType;
+
+  image!: string;
 }
 
 UsersModel.init(
@@ -79,6 +81,11 @@ UsersModel.init(
           args: [USER_TYPES],
         },
       },
+    },
+    image: {
+      type: DataTypes.STRING,
+      defaultValue: '',
+      allowNull: false,
     },
   },
   {
