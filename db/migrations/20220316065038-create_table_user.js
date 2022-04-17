@@ -70,6 +70,8 @@ module.exports = {
           },
         },
       },
+      updatedAt: Sequelize.DataTypes.DATE,
+      createdAt: Sequelize.DataTypes.DATE,
     });
   },
 
