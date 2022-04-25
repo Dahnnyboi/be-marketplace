@@ -62,11 +62,11 @@ export default (app: Router) => {
     (req: Request, res: Response, next: NextFunction) => {
       const { firstName, lastName, email, image } =
         req.body as UserModel;
-      const { id } = req.payload;
+      const { userId } = req.payload;
 
       const handler = async () => {
         await userService.updateUserDetails(
-          id,
+          userId,
           firstName,
           lastName,
           email,
@@ -112,17 +112,17 @@ export default (app: Router) => {
     }),
     expressValidatorErrorHandler,
     async (req: Request, res: Response, next: NextFunction) => {
-      const { id } = req.payload;
+      const { userId } = req.payload;
       const { currentPassword, newPassword } =
         req.body as PasswordBody;
 
       const isCurrPasswordMatch = await userService.checkUserPassword(
-        id,
+        userId,
         currentPassword,
       );
 
       const isNewPasswordMatch = await userService.checkUserPassword(
-        id,
+        userId,
         newPassword,
       );
 
@@ -147,7 +147,7 @@ export default (app: Router) => {
       }
 
       try {
-        await userService.updateUserPassword(id, newPassword);
+        await userService.updateUserPassword(userId, newPassword);
 
         res
           .status(200)

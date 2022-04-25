@@ -3,11 +3,13 @@ declare namespace Express {
     // for passport.authenticate('local') middleware
     user: {
       userId: string;
+      type: UserType;
     };
 
     // saving payload on user.id if authenticated
     payload: {
-      id: string;
+      userId: string;
+      type: UserType;
     };
   }
 }

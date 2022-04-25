@@ -1,22 +1,14 @@
 'use strict';
-
 module.exports = {
   async up(queryInterface, Sequelize) {
-    /**
-     * Add altering commands here.
-     *
-     * Example:
-     * await queryInterface.createTable('users', { id: Sequelize.INTEGER });
-     */
-    return queryInterface.createTable('Users', {
+    await queryInterface.createTable('Users', {
       userId: {
-        defaultValue: Sequelize.UUIDV4,
-        type: Sequelize.DataTypes.UUID,
+        type: Sequelize.UUID,
         allowNull: false,
         primaryKey: true,
       },
       firstName: {
-        type: Sequelize.DataTypes.STRING,
+        type: Sequelize.STRING,
         allowNull: false,
         validate: {
           notNull: {
@@ -25,7 +17,7 @@ module.exports = {
         },
       },
       lastName: {
-        type: Sequelize.DataTypes.STRING,
+        type: Sequelize.STRING,
         allowNull: false,
         validate: {
           notNull: {
@@ -34,7 +26,7 @@ module.exports = {
         },
       },
       email: {
-        type: Sequelize.DataTypes.STRING,
+        type: Sequelize.STRING,
         allowNull: false,
         unique: {
           name: 'email',
@@ -50,15 +42,15 @@ module.exports = {
         },
       },
       salt: {
-        type: Sequelize.DataTypes.STRING,
+        type: Sequelize.STRING,
         allowNull: false,
       },
       password: {
-        type: Sequelize.DataTypes.STRING,
+        type: Sequelize.STRING,
         allowNull: false,
       },
       type: {
-        type: Sequelize.DataTypes.STRING,
+        type: Sequelize.STRING,
         allowNull: false,
         validate: {
           notNull: {
@@ -70,18 +62,22 @@ module.exports = {
           },
         },
       },
-      updatedAt: Sequelize.DataTypes.DATE,
-      createdAt: Sequelize.DataTypes.DATE,
+      image: {
+        type: Sequelize.DataTypes.STRING,
+        defaultValue: '',
+        allowNull: false,
+      },
+      createdAt: {
+        allowNull: false,
+        type: Sequelize.DATE,
+      },
+      updatedAt: {
+        allowNull: false,
+        type: Sequelize.DATE,
+      },
     });
   },
-
   async down(queryInterface, Sequelize) {
-    /**
-     * Add reverting commands here.
-     *
-     * Example:
-     * await queryInterface.dropTable('users');
-     */
-    return queryInterface.dropTable('Users');
+    await queryInterface.dropTable('Users');
   },
 };

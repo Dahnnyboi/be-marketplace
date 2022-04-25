@@ -6,10 +6,13 @@ import { JWT_ALGORITHM } from 'constants/common';
 @Service()
 class AuthService {
   // eslint-disable-next-line class-methods-use-this
-  async createToken(id: string): Promise<string | false> {
+  async createToken(
+    userId: string,
+    type: UserType,
+  ): Promise<string | false> {
     const token: string = await new Promise((resolve, reject) => {
       sign(
-        { id },
+        { userId, type },
         JWT_SECRET,
         {
           algorithm: JWT_ALGORITHM,

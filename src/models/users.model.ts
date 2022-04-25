@@ -77,8 +77,11 @@ UsersModel.init(
           msg: FEEDBACK.required('type'),
         },
         isIn: {
-          msg: FEEDBACK.onlyValidType('type', USER_TYPES),
-          args: [USER_TYPES],
+          msg: FEEDBACK.onlyValidType(
+            'type',
+            Object.values(USER_TYPES),
+          ),
+          args: [Object.values(USER_TYPES)],
         },
       },
     },
@@ -91,6 +94,7 @@ UsersModel.init(
   {
     sequelize: sequelizeInstance,
     tableName: 'Users',
+    modelName: 'Users',
     timestamps: true,
   },
 );

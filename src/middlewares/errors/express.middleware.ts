@@ -8,9 +8,9 @@ export const customErrorHandler = (
   res: Response,
   next: NextFunction,
 ) => {
-  res
-    .status(500)
-    .json({ error: { name: err.name, message: 'Server Error' } });
+  console.log(err);
+  const message = err.message || 'Server error';
+  res.status(500).json({ error: { name: err.name, message } });
 };
 
 export const unauthorizedErrorHandler = (

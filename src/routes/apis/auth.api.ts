@@ -20,13 +20,16 @@ export default (app: Router) => {
     // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
     passport.authenticate('local'),
     async (req: Request, res: Response) => {
-      if (!req.user)
+      if (!req.user) {
         res
           .status(400)
           .json({ error: { message: 'Cannot find user' } })
           .end();
+        return;
+      }
 
-      const token = await authService.createToken(req?.user.userId);
+      const { userId, type } = req.user;
+      const token = await authService.createToken(userId, type);
 
       if (!token)
         res
@@ -42,10 +45,10 @@ export default (app: Router) => {
     '/refresh',
     authRequired,
     async (req: Request, res: Response) => {
-      const { id } = req.payload;
+      const { userId, type } = req.payload;
 
-      const user = await userService.findUserById(id);
-      const token = await authService.createToken(id);
+      const user = await userService.findUserById(userId);
+      const token = await authService.createToken(userId, type);
 
       if (!user && !token)
         res
