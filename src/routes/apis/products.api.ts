@@ -2,10 +2,15 @@ import { Router, Request, Response, NextFunction } from 'express';
 import { body } from 'express-validator';
 import { FEEDBACK } from 'constants/validations';
 import authRequired from 'middlewares/auth/jwt.middleware';
-import { sellerCheckerMiddleware } from 'middlewares/auth/type.middleware';
+import {
+  sellerCheckerMiddleware,
+  buyerCheckerMiddleware,
+} from 'middlewares/auth/type.middleware';
 import { expressValidatorErrorHandler } from 'middlewares/errors/express-validator.middleware';
 import ProductsModel from 'models/products.model';
+import ProductReviewsModel from 'models/product-reviews.model';
 import productsService from 'services/product.service';
+import productReviewsService from 'services/product-reviews.service';
 
 const route = Router();
 
@@ -148,6 +153,74 @@ export default (app: Router) => {
         .catch((e) => {
           next(e);
         });
+    },
+  );
+
+  route.post(
+    '/:productId/product-reviews',
+    authRequired,
+    buyerCheckerMiddleware,
+    body('title', FEEDBACK.required('title')).isString().notEmpty(),
+    body('description', FEEDBACK.required('description'))
+      .isString()
+      .notEmpty(),
+    body('stars', FEEDBACK.required('stars')).isNumeric().notEmpty(),
+    expressValidatorErrorHandler,
+    (req: Request, res: Response, next: NextFunction) => {
+      const { userId } = req.payload;
+      const { productId } = req.params;
+      const { title, description, stars } =
+        req.body as ProductReviewsModel;
+
+      const handler = async () => {
+        await productReviewsService.createProductReview(
+          userId,
+          productId,
+          title,
+          description,
+          stars,
+        );
+      };
+
+      handler()
+        .then(() => {
+          res
+            .status(200)
+            .json({ message: 'Successfully created product review' });
+        })
+        .catch((e) => {
+          next(e);
+        });
+    },
+  );
+
+  route.get(
+    '/:productId/product-reviews',
+    (req: Request, res: Response, next: NextFunction) => {
+      const { productId } = req.params;
+      const { limit, offset, order, orderBy } =
+        req.params as unknown as PaginationQuery;
+
+      const handler = async () => {
+        const datas =
+          await productReviewsService.getProductReviewsList(
+            productId,
+            limit,
+            offset,
+            order,
+            orderBy,
+          );
+
+        return datas;
+      };
+
+      handler()
+        .then((datas) => {
+          const { data, meta } = datas;
+
+          res.status(200).json({ data, meta });
+        })
+        .catch((e) => next(e));
     },
   );
 };

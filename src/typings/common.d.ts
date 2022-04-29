@@ -43,7 +43,7 @@ type PaginationQuery = {
   offset: number;
   order: Ordering;
   orderBy: string;
-  search: string;
+  search?: string;
 };
 
 type PaginationInterface = {
